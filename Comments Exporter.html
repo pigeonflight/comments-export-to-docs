@@ -1,0 +1,36 @@
+<div class="comments-exporter-container">
+<div>
+<button id="init">Export Comments</button>
+<div id="output"></div>
+</div>
+</div>
+<style>
+#output{margin-top:32px;}
+.comments-exporter-container{padding:16px;}
+</style>
+
+<script>
+document.getElementById('init').onclick = function() {
+    this.innerHTML = "exporting...";
+    generateCommentDoc();
+  };
+
+function generateCommentDoc(){
+var output = google.script.run.withSuccessHandler(callback)
+               .generateCommentDocument()
+}
+  
+function callback(doc_url) {
+  var msg = "View comments document";
+  var document_link = "<a href='"
+                 + doc_url
+                 + "'"
+                 + "target='_top'>"
+                 + msg
+                 + "</a>"
+  document.getElementById("init").innerHTML = "Export Comments";               
+  document.getElementById("output").innerHTML = document_link;
+
+}
+
+</script>
